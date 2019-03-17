@@ -1,5 +1,8 @@
 package com.company.game.abilities;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+
 public interface Movable {
     /**
      *

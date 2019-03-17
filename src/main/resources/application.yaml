@@ -1,6 +1,6 @@
 logging:
   level:
-    ROOT: trace
+    ROOT: debug
 server:
   address: localhost
-  port: 8080
+  port: 9000

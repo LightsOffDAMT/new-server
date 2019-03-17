@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface UserService<USER_TYPE> {
     Optional<USER_TYPE> getUser(String id);
     void addUser(String id, USER_TYPE user);
+    void disconnectUser(String id);
 }

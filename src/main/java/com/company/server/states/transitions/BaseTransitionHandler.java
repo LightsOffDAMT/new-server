@@ -1,5 +1,7 @@
 package com.company.server.states.transitions;
 
+import com.company.game.entities.Player;
+import com.company.game.mechanics.states.PlayerState;
 import com.company.server.states.TransitionRule;
 import com.company.server.states.annotations.RandomString;
 import com.company.server.states.possibilities.StateHolder;
@@ -13,13 +15,11 @@ import java.util.Optional;
 
 public class BaseTransitionHandler implements TransitionHandler {
     private final static Logger LOGGER = LoggerFactory.getLogger(BaseTransitionHandler.class);
-    @RandomString(length = 5)
-    private String id;
     private TransitionMachine transitionMachine;
     private StateHolder stateHolder;
 
     @Override
-    public Transition transit(String to) {
+    public Transition transit(String id, String to) {
         if(id == null){
             LOGGER.error("Unable to transit() of user with ID = null");
             throw new RuntimeException("Unable to transit() of user with ID = null");
@@ -35,9 +35,9 @@ public class BaseTransitionHandler implements TransitionHandler {
             throw new RuntimeException("State name should consist only digits or alphabetic chars");
         }
 
-        final String from = Optional.ofNullable(stateHolder.getState(id)).orElse("NONE");
+        final String from = Optional.ofNullable(stateHolder.getState(id)).orElse(PlayerState.INITIAL_STATE);
 
-        if(from.equals("NONE"))
+        if(from.equals(PlayerState.INITIAL_STATE) )
             stateHolder.setState(id, from);
 
         LOGGER.debug("Requested transition from \'{}\' to \'{}\', by user with ID:\'{}\'", from, to, id);
@@ -48,11 +48,6 @@ public class BaseTransitionHandler implements TransitionHandler {
         }
         LOGGER.debug("Declined transition from \'{}\' to \'{}\', by user with ID:\'{}\'", from, to, id);
         return new Transition(TransitionRule.NONE, "Declined");
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Autowired

@@ -26,4 +26,8 @@ public class SocketIOClientUserService implements UserService<SocketIOClient> {
         clients.put(id, user);
     }
 
+    @Override
+    public void disconnectUser(String id) {
+        clients.get(id).disconnect();
+    }
 }

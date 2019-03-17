@@ -1,7 +1,9 @@
 package com.company.server.util;
 
-import com.company.server.eventHandlers.pipeline.EventIncomingHandler;
-import com.company.server.eventHandlers.pipeline.SimpleEventIncomingHandler;
+import com.company.server.events.pipeline.EventIncomingHandler;
+import com.company.server.events.pipeline.SimpleEventIncomingHandler;
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.listener.DataListener;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 public class EventPipelineConfigurationBuilder {
     private ArrayList<EventIncomingHandler> handlers = new ArrayList<>();
 
-    public <T> EventPipelineConfigurationBuilder next(SimpleEventIncomingHandler<T> handler){
+    public <T> EventPipelineConfigurationBuilder next(EventIncomingHandler handler){
         handlers.add(handler);
         return this;
     }

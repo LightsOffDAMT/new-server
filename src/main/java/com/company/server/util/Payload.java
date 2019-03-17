@@ -1,7 +1,7 @@
 package com.company.server.util;
 
 public class Payload<T> {
-    private String eventName;
+    private String eventName = "";
     private T payload;
 
     public String getEventName() {
@@ -20,5 +20,13 @@ public class Payload<T> {
     public Payload<T> setPayload(final T payload) {
         this.payload = payload;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Payload{" +
+                "eventName='" + eventName + '\'' +
+                ", payload=" + payload +
+                '}';
     }
 }

@@ -1,18 +1,17 @@
 package com.company.game.contributed;
 
 import com.company.game.entities.Player;
-import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 
-@Component
-public class PlayerGameStorage implements GameStorage<ConcurrentSkipListSet<Player>> {
-    private ConcurrentSkipListSet<Player> storage = new ConcurrentSkipListSet<>(Comparator.comparing(Player::getId));
+public class PlayerGameStorage implements GameStorage<ConcurrentHashMap<String, Player>> {
+    private ConcurrentHashMap<String, Player> storage = new ConcurrentHashMap<String, Player>();
 
     @Override
-    public ConcurrentSkipListSet<Player> storage() {
+    public ConcurrentHashMap<String, Player> storage() {
         return storage;
     }
 }

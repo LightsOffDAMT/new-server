@@ -1,9 +1,12 @@
 package com.company.server.util;
 
 import com.corundumstudio.socketio.AuthorizationListener;
+import com.corundumstudio.socketio.ClientOperations;
 import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
+import com.corundumstudio.socketio.listener.DisconnectListener;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -47,6 +50,16 @@ public class ServerConfigurationBuilder {
 
         public ListenerConfigurationBuilder listen(final String eventName, final Class<?> dataClass){
             return new ListenerConfigurationBuilder(eventName, dataClass);
+        }
+
+        public EventConfigurationBuilder onConnect(ConnectListener connectListener){
+            server.addConnectListener(connectListener);
+            return EventConfigurationBuilder.this;
+        }
+
+        public EventConfigurationBuilder onDisconnect(DisconnectListener disconnectListener){
+            server.addDisconnectListener(disconnectListener);
+            return EventConfigurationBuilder.this;
         }
 
         public SocketIOServer build(){

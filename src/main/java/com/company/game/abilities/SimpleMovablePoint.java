@@ -1,11 +1,17 @@
 package com.company.game.abilities;
 
+import java.awt.*;
+import java.util.function.Function;
+
+
 public class SimpleMovablePoint implements Movable {
-    private double x;
-    private double y;
+    private double x = 0;
+    private double y = 0;
+    private double rotation = 0;
 
     @Override
     public void moveToPoint(double x, double y) {
+        System.out.println("Moved to point {" + x + ", " + y + "}");
         setX(x).setY(y);
     }
 
@@ -37,5 +43,14 @@ public class SimpleMovablePoint implements Movable {
     public SimpleMovablePoint setY(final double y) {
         this.y = y;
         return this;
+    }
+
+    public SimpleMovablePoint setRotation(double rotation) {
+        this.rotation = rotation;
+        return this;
+    }
+
+    public double getRotation() {
+        return rotation;
     }
 }

@@ -22,7 +22,7 @@ public class Bootstrap {
 
     void init(){
         ScheduledExecutorService es = Executors.newScheduledThreadPool(8);
-        es.scheduleAtFixedRate(gameCycle, 5000, 1000, TimeUnit.MILLISECONDS);
+        es.scheduleAtFixedRate(gameCycle, 5000, 25, TimeUnit.MILLISECONDS);
         server.start();
     }
 }
